@@ -12,6 +12,12 @@
         <junit.version>4.11</junit.version>
         <jdk.version>1.6</jdk.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>webjars</id>
+            <url>http://webjars.github.com/m2</url>
+        </repository>
+    </repositories>
     <dependencies>
      <!-- Spring 3 dependencies -->
         <dependency>
@@ -33,13 +39,72 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>1.10.2-1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-lgpl</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
     </dependencies>
   <build>
     <finalName>basis-webapp-spring</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.tomcat.maven</groupId>
+              <artifactId>tomcat7-maven-plugin</artifactId>
+              <!-- or if you want to use tomcat 6.x
+              <artifactId>tomcat6-maven-plugin</artifactId>
+              -->
+              <version>2.1</version>
+              <configuration>
+                  <!-- http port -->
+                  <port>8080</port>
+                  <!-- application path always starts with /-->
+                  <path>/</path>
+                  <!-- if you want to use test dependencies rather than only runtime -->
+                  <useTestClasspath>false</useTestClasspath>
+                  <!-- optional if you want to add some extra directories into the classloader -->
+                  <additionalClasspathDirs>
+                      <additionalClasspathDir></additionalClasspathDir>
+                  </additionalClasspathDirs>
+              </configuration>
+              <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
+          </plugin>
+      </plugins>
   </build>
 </project>
