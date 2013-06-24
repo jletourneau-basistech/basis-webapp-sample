@@ -11,6 +11,7 @@
         <spring.version>3.0.5.RELEASE</spring.version>
         <junit.version>4.11</junit.version>
         <jdk.version>1.6</jdk.version>
+        <jettyVersion>7.2.0.v20101020</jettyVersion>
     </properties>
     <repositories>
         <repository>
@@ -85,12 +86,9 @@
     <finalName>basis-webapp-spring</finalName>
       <plugins>
           <plugin>
-              <groupId>org.apache.tomcat.maven</groupId>
-              <artifactId>tomcat7-maven-plugin</artifactId>
-              <!-- or if you want to use tomcat 6.x
-              <artifactId>tomcat6-maven-plugin</artifactId>
-              -->
-              <version>2.1</version>
+              <groupId>org.mortbay.jetty</groupId>
+              <artifactId>jetty-maven-plugin</artifactId>
+              <version>${jettyVersion}</version>
               <configuration>
                   <!-- http port -->
                   <port>8080</port>
