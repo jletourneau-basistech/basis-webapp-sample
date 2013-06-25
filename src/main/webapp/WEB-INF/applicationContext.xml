@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:security="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+    <security:http auto-config="true" create-session="always">
+
+        <security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/validate*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/js*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/css*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/*" access="ROLE_USER" />
+
+        <security:form-login login-page="/login"
+        always-use-default-target="true" default-target-url="/"
+        authentication-failure-url="/login?login_error=1" />
+        <security:logout logout-url="/logout" logout-success-url="/" />
+
+    </security:http>
+
+
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="customUserDetailsService"/>
+
+
+    </security:authentication-manager>
+
+    <security:ldap-server ldif="classpath:mojo.ldif"  root="o=mojo"/>
+
+    <bean id="customUserDetailsService" class="com.basistech.basis.webapp.security.CustomUserDetailsService"/>
+
+    <bean id="tokenStoreService" class="com.basistech.basis.webapp.security.TokenStore"/>
+
+
+
+</beans>

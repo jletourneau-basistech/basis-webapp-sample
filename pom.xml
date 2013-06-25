@@ -40,6 +40,36 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-all</artifactId>
+            <version>1.5.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
@@ -89,20 +119,7 @@
               <groupId>org.mortbay.jetty</groupId>
               <artifactId>jetty-maven-plugin</artifactId>
               <version>${jettyVersion}</version>
-              <configuration>
-                  <!-- http port -->
-                  <port>8080</port>
-                  <!-- application path always starts with /-->
-                  <path>/</path>
-                  <!-- if you want to use test dependencies rather than only runtime -->
-                  <useTestClasspath>false</useTestClasspath>
-                  <!-- optional if you want to add some extra directories into the classloader -->
-                  <additionalClasspathDirs>
-                      <additionalClasspathDir></additionalClasspathDir>
-                  </additionalClasspathDirs>
-              </configuration>
-              <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
-          </plugin>
+         </plugin>
       </plugins>
   </build>
 </project>
