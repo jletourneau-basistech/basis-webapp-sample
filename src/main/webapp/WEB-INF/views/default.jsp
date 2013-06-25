@@ -17,10 +17,6 @@
       <li><a href="welcome/jason">A GET request for HTML with a path variable</a></li>
       <li><a href="welcome.json">A GET request for JSON</a></li>
       <li><a href="welcome/jason.json">A GET request for JSON with a path variable</a></li>
-
-
-
-
     </ul>
 
         <p> Auth and Token Stuff:</p>

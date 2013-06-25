@@ -6,10 +6,6 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-
-
-
-
     private Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
     private String password;
     private String username;

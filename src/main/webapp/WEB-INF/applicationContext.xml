@@ -1,5 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
         xmlns:security="http://www.springframework.org/schema/security"
+        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:context="http://www.springframework.org/schema/context"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -11,7 +12,7 @@
 
     <context:component-scan base-package="com.basistech.basis.webapp.security" />
 
-    <security:http auto-config="true" create-session="always">
+    <security:http auto-config="true" create-session="never">
 
         <security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/validate*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
@@ -22,19 +23,21 @@
         <security:form-login login-page="/login"
         always-use-default-target="true" default-target-url="/"
         authentication-failure-url="/login?login_error=1" />
-        <security:logout logout-url="/logout" logout-success-url="/" />
+
+        <security:logout logout-success-url="/" />
 
     </security:http>
 
-
-
     <security:authentication-manager alias="authenticationManager">
+        <!--
         <security:authentication-provider user-service-ref="customUserDetailsService"/>
+        -->
+        <security:ldap-authentication-provider
+                user-search-filter="uid={0}"/>
 
+     </security:authentication-manager>
 
-    </security:authentication-manager>
-
-    <security:ldap-server ldif="classpath:mojo.ldif"  root="o=mojo"/>
+    <security:ldap-server ldif="classpath:mojo.ldif"  root="ou=people,o=basis"/>
 
     <bean id="customUserDetailsService" class="com.basistech.basis.webapp.security.CustomUserDetailsService"/>
 

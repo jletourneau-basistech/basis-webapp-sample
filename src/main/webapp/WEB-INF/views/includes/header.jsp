@@ -36,6 +36,7 @@
                <ul class="pull-right nav">
                  <li><a href="#">About</a></li>
                  <li><a href="#">Support</a></li>
+                 <li><a href="<c:url value="j_spring_security_logout" />" > Logout</a></li>
                </ul>
 
                <ul class="nav" role="navigation">

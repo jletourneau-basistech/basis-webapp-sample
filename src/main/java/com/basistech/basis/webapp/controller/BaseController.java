@@ -19,7 +19,6 @@ public class BaseController {
     @Autowired
     TokenStore tokenStore;
 
-    @Autowired
 
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
