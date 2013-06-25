@@ -1,5 +1,6 @@
 package com.basistech.basis.webapp.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ public class BaseController {
     @Autowired
     TokenStore tokenStore;
 
+    @Autowired
+
+
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login() {
         return "login";
@@ -33,9 +37,11 @@ public class BaseController {
         return "validate";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/token",method = RequestMethod.GET)
     public String token(@RequestParam("uid") String userId,
                            ModelMap modelMap) {
+
         modelMap.put("token",tokenStore.getTokenForUserId(userId));
         return "token";
     }

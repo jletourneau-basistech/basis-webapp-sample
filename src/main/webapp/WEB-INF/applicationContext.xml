@@ -1,10 +1,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
         xmlns:security="http://www.springframework.org/schema/security"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
         xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/security
-          http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+          http://www.springframework.org/schema/security/spring-security-3.0.3.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.basistech.basis.webapp.security" />
+
     <security:http auto-config="true" create-session="always">
 
         <security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
@@ -31,8 +37,6 @@
     <security:ldap-server ldif="classpath:mojo.ldif"  root="o=mojo"/>
 
     <bean id="customUserDetailsService" class="com.basistech.basis.webapp.security.CustomUserDetailsService"/>
-
-    <bean id="tokenStoreService" class="com.basistech.basis.webapp.security.TokenStore"/>
 
 
 

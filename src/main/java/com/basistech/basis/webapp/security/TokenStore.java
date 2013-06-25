@@ -4,22 +4,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class TokenStore {
 
-    private HashMap<String,String> grantedTokens= new HashMap<String, String>();
+    private HashMap<String,String> grantedTokens;
 
     public TokenStore(){
 
     }
 
     public String getTokenForUserId(String uid){
+        if (grantedTokens==null){
+            grantedTokens = new HashMap<String, String>();
+            generateTokenForUserId(uid) ;
+        }
         return grantedTokens.get(uid);
     }
 
     public String generateTokenForUserId(String uid){
-
+        if (grantedTokens==null){
+            grantedTokens = new HashMap<String, String>();
+        }
         String token = UUID.randomUUID().toString();
         grantedTokens.put(uid,token);
         return token;

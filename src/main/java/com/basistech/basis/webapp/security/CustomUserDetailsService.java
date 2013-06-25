@@ -3,6 +3,7 @@ package com.basistech.basis.webapp.security;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import java.util.HashSet;
 import java.util.HashMap;
 
-@Service
+@Component
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -22,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private static HashMap<String, UserDetails> userRepository = new HashMap<String, UserDetails>();
 
     static{
-        GrantedAuthority authorityUser = new GrantedAuthorityImpl("USER");
+        GrantedAuthority authorityUser = new GrantedAuthorityImpl("ROLE_USER");
 
         HashSet<GrantedAuthority> authorities1 = new HashSet<GrantedAuthority>();
         authorities1.add(authorityUser);
@@ -33,6 +34,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails matchingUser = userRepository.get(username);
+
+        tokenStore.generateTokenForUserId(username);
 
         if(matchingUser == null){
             throw new UsernameNotFoundException("Wrong username or password");
